@@ -8,3 +8,52 @@
   margin: 0;
   padding: 0;
 }
+
+* {
+  background-color: #1e2b1e;
+}
+
+div {
+}
+
+header {
+  text-align: center;
+  margin: 10px 0 30px;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+.container div{
+  border: 2px solid #9eb996;
+}
+
+.calculator-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 400px;
+  width: 250px;
+}
+
+.display {
+  height: 70px;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  display: flex;
+  justify-content: space-around;
+  height: 55px;
+}
+
+.row button {
+  height: 50px;
+  width: 50px;
+}
