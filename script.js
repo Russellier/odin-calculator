@@ -4,6 +4,7 @@ const displayWindow = document.querySelector('p.display');
 const numberBtns = document.querySelectorAll('.number');
 const operatorBtns = document.querySelectorAll('.operator');
 const clearBtn = document.querySelector('.clear');
+const deleteBtn = document.querySelector('.delete');
 
 let x;
 let y;
@@ -83,5 +84,9 @@ clearBtn.addEventListener('click', () => {
   answer = '';
   operator = '';
   displayWindow.textContent = '';
+});
+
+deleteBtn.addEventListener('click', () => {
+  displayWindow.textContent = displayWindow.textContent.slice(0, -1);
 });
 
