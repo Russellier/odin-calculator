@@ -21,7 +21,11 @@ operator functions
   display
 
 5. Create function to populate display when number button is clicked
-  store 'display value' in a variables
+  store 'display value' in a variable
+  - if x has no value, store the value in x when an operator is clicked
+  - if x has a value,
+    - clear display and show next value
+    - store the value in y
 
 6. Make the calculator work
   - store the first and second number from user's input

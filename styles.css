@@ -9,13 +9,6 @@
   padding: 0;
 }
 
-* {
-  background-color: #1e2b1e;
-}
-
-div {
-}
-
 header {
   text-align: center;
   margin: 10px 0 30px;
@@ -24,10 +17,6 @@ header {
 .container {
   display: flex;
   justify-content: center;
-}
-
-.container div{
-  border: 2px solid #9eb996;
 }
 
 .calculator-body {
@@ -50,10 +39,23 @@ header {
 .row {
   display: flex;
   justify-content: space-around;
+  align-items: center;
   height: 55px;
 }
 
 .row button {
-  height: 50px;
-  width: 50px;
+  height: 48px;
+  width: 48px;
+  border-radius: 8px;
 }
+
+/* Temporary */
+* {
+  background-color: #1e2b1e;
+}
+
+.calculator-body,
+.display,
+.buttons-container {
+  border: 2px solid #9eb996;
+} 
