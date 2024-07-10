@@ -12,31 +12,31 @@ let operator = '';
 let isOperatorClicked = false;
 
 function add(a, b) {
-  return answer = a + b;
+  return a + b;
 }
 
 function subtract(a, b) {
-  return answer = a - b;
+  return a - b;
 }
 
 function multiply(a, b) {
-  return answer = a * b;
+  return a * b;
 }
 
 function divide(a, b) {
-  if (b === 0) return answer = 'Error'
-  return answer = a / b;
+  if (b === 0) return 'Error'
+  return a / b;
 }
 
 function operate(a, b, operator) {
   switch (operator) {
-    case 'add':
+    case '+':
       return add(a, b);
-    case 'subtract':
+    case '-':
       return subtract(a, b);
-    case 'multiply':
+    case 'X':
       return multiply(a, b);
-    case 'divide':
+    case '/':
       return divide(a, b);
   }
 }
@@ -57,9 +57,11 @@ operatorBtns.forEach((button) => {
   button.addEventListener('click', () => {
     isOperatorClicked = true;
     operator = button.innerText;
-    if (!x) x = displayWindow.textContent;
-    else if (!y) y = displayWindow.textContent;
-    else operate(x, y, operator);
+
+    if (!x) x = parseInt(displayWindow.textContent);
+    else if (!y) y = parseInt(displayWindow.textContent);
+
+    if (x && y) answer = operate(x, y, operator);
     console.log(`${x} ${operator} ${y} : ${answer}`);
   });
 });
