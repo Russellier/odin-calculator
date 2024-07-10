@@ -3,7 +3,7 @@
 const displayWindow = document.querySelector('p.display');
 const numberBtns = document.querySelectorAll('.number');
 const operatorBtns = document.querySelectorAll('.operator');
-const equalSignBtn = document.querySelector('.equal-sign');
+const clearBtn = document.querySelector('.clear');
 
 let x;
 let y;
@@ -62,10 +62,22 @@ operatorBtns.forEach((button) => {
 
     if (x && y) answer = operate(x, y, operator);
 
-    if (answer) displayWindow.textContent = answer;
-
-    console.log(`${x} ${operator} ${y} : ${answer}`);
+    if (answer) {
+      displayWindow.textContent = answer;
+      x = answer;
+      y = '';
+      answer = '';
+    }
+    console.log(`x: ${x} ${operator} y: ${y} answer: ${answer}`);
     operator = button.innerText;
   });
+});
+
+clearBtn.addEventListener('click', () => {
+  x = '';
+  y = '';
+  answer = '';
+  operator = '';
+  displayWindow.textContent = '';
 });
 
