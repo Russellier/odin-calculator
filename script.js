@@ -77,7 +77,6 @@ operatorBtns.forEach((button) => {
   });
 });
 
-
 clearBtn.addEventListener('click', () => {
   x = '';
   y = '';
