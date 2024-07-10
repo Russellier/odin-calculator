@@ -56,12 +56,16 @@ numberBtns.forEach((button) => {
 operatorBtns.forEach((button) => {
   button.addEventListener('click', () => {
     isOperatorClicked = true;
-    operator = button.innerText;
 
     if (!x) x = parseInt(displayWindow.textContent);
     else if (!y) y = parseInt(displayWindow.textContent);
 
     if (x && y) answer = operate(x, y, operator);
+
+    if (answer) displayWindow.textContent = answer;
+
     console.log(`${x} ${operator} ${y} : ${answer}`);
+    operator = button.innerText;
   });
 });
+
