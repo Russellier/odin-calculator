@@ -1,7 +1,7 @@
 *,
 *::before,
 *::after {
-  box-sizing:border-box;
+  box-sizing: border-box;
 }
 
 * {
@@ -25,6 +25,13 @@ header {
   justify-content: space-around;
   height: 400px;
   width: 250px;
+  border: 1px solid #9eb996;
+  border-radius: 20px;
+}
+
+.calculator-body > div {
+  margin: 0 5px 0;
+  border: 1px solid #9eb996;
 }
 
 .display {
@@ -34,7 +41,6 @@ header {
   font-size: 35px;
   height: 70px;
 }
-
 
 .buttons {
   display: flex;
@@ -58,9 +64,3 @@ header {
 * {
   background-color: #1e2b1e;
 }
-
-.calculator-body,
-.display,
-.buttons-container {
-  border: 2px solid #9eb996;
-} 
