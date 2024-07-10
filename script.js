@@ -44,14 +44,22 @@ function operate(a, b, operator) {
 
 // fix: user can input decimal point multiple times
 // fix: user can input 0 multiple times. e.g. '00000005'
-// fix: won't accept decimal numbers
+// fix: input of '.2' displays as '.2'; should be '0.2'
+// fix: multiple clicks of operator
 numberBtns.forEach((button) => {
   button.addEventListener('click', () => {
     if (isOperatorClicked) {
       displayWindow.textContent = '';
       isOperatorClicked = false;
     }
-    displayWindow.textContent += button.innerText;
+
+    let charToAdd = button.innerText;
+  
+    if (displayWindow.textContent.includes('.')) {
+      if (charToAdd === '.') charToAdd = ''
+    }
+
+    displayWindow.textContent += charToAdd;
   });
 });
 
@@ -89,4 +97,3 @@ clearBtn.addEventListener('click', () => {
 deleteBtn.addEventListener('click', () => {
   displayWindow.textContent = displayWindow.textContent.slice(0, -1);
 });
-
