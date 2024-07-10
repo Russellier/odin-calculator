@@ -43,6 +43,7 @@ function operate(a, b, operator) {
 
 // fix: user can input decimal point multiple times
 // fix: user can input 0 multiple times. e.g. '00000005'
+// fix: won't accept decimal numbers
 numberBtns.forEach((button) => {
   button.addEventListener('click', () => {
     if (isOperatorClicked) {
@@ -57,10 +58,14 @@ operatorBtns.forEach((button) => {
   button.addEventListener('click', () => {
     isOperatorClicked = true;
 
-    if (!x) x = parseInt(displayWindow.textContent);
-    else if (!y) y = parseInt(displayWindow.textContent);
+    if (!x) x = Number(displayWindow.textContent);
+    else if (!y) y = Number(displayWindow.textContent);
 
     if (x && y) answer = operate(x, y, operator);
+
+    operator = button.innerText;
+
+    console.log(`x: ${x} ${operator} y: ${y} answer: ${answer}`);
 
     if (answer) {
       displayWindow.textContent = answer;
@@ -68,10 +73,10 @@ operatorBtns.forEach((button) => {
       y = '';
       answer = '';
     }
-    console.log(`x: ${x} ${operator} y: ${y} answer: ${answer}`);
-    operator = button.innerText;
+    if (operator === '=') x = '';
   });
 });
+
 
 clearBtn.addEventListener('click', () => {
   x = '';
