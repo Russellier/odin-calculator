@@ -1,18 +1,20 @@
-"use strict";
+'use strict';
 
 const displayWindow = document.querySelector('p.display');
 const numberBtns = document.querySelectorAll('.number');
 const operatorBtns = document.querySelectorAll('.operator');
 const clearBtn = document.querySelector('.clear');
 const deleteBtn = document.querySelector('.delete');
+const maxDisplayLength = 12;
 
 let x;
 let y;
 let answer;
 let operator = '';
 let isOperatorClicked = false;
+let isNumberClicked = false;
 
-displayWindow.textContent = '0'
+displayWindow.textContent = '0';
 
 function add(a, b) {
   return a + b;
@@ -27,7 +29,7 @@ function multiply(a, b) {
 }
 
 function divide(a, b) {
-  if (b === 0) return 'Error'
+  if (b === 0) return 'Error';
   return a / b;
 }
 
@@ -44,27 +46,29 @@ function operate(a, b, operator) {
   }
 }
 
-// fix: user can input 0 multiple times. e.g. '00000005'
-// fix: input of '.2' displays as '.2'; should be '0.2'
-// fix: multiple clicks of operator
+//  fix: multiple clicks of operator
+//  fix: limit answer display length
+//    show as exponent or round of decimal numbers
 numberBtns.forEach((button) => {
   button.addEventListener('click', () => {
+    isNumberClicked = true;
+
     if (isOperatorClicked) {
       displayWindow.textContent = '';
       isOperatorClicked = false;
     }
 
     let charToAdd = button.innerText;
-  
-    if (displayWindow.textContent.includes('.') 
-      && charToAdd === '.'
-    ) charToAdd = '';
+
+    if (displayWindow.textContent.includes('.') && charToAdd === '.')
+      charToAdd = '';
 
     if (displayWindow.textContent === '0')
-      if (charToAdd === '0') charToAdd ='';
+      if (charToAdd === '0') charToAdd = '';
       else if (charToAdd != '.') displayWindow.textContent = '';
 
-    displayWindow.textContent += charToAdd;
+    if (displayWindow.textContent.length <= maxDisplayLength)
+      displayWindow.textContent += charToAdd;
   });
 });
 
@@ -72,8 +76,10 @@ operatorBtns.forEach((button) => {
   button.addEventListener('click', () => {
     isOperatorClicked = true;
 
-    if (!x) x = Number(displayWindow.textContent);
-    else if (!y) y = Number(displayWindow.textContent);
+    if (isNumberClicked) {
+      if (!x) x = Number(displayWindow.textContent);
+      else if (!y) y = Number(displayWindow.textContent);
+    }
 
     if (x && y) answer = operate(x, y, operator);
 
@@ -88,6 +94,8 @@ operatorBtns.forEach((button) => {
       answer = '';
     }
     if (operator === '=') x = '';
+
+    isNumberClicked = false;
   });
 });
 
