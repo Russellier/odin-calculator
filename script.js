@@ -12,6 +12,8 @@ let answer;
 let operator = '';
 let isOperatorClicked = false;
 
+displayWindow.textContent = '0'
+
 function add(a, b) {
   return a + b;
 }
@@ -42,7 +44,6 @@ function operate(a, b, operator) {
   }
 }
 
-// fix: user can input decimal point multiple times
 // fix: user can input 0 multiple times. e.g. '00000005'
 // fix: input of '.2' displays as '.2'; should be '0.2'
 // fix: multiple clicks of operator
@@ -55,9 +56,13 @@ numberBtns.forEach((button) => {
 
     let charToAdd = button.innerText;
   
-    if (displayWindow.textContent.includes('.')) {
-      if (charToAdd === '.') charToAdd = ''
-    }
+    if (displayWindow.textContent.includes('.') 
+      && charToAdd === '.'
+    ) charToAdd = '';
+
+    if (displayWindow.textContent === '0')
+      if (charToAdd === '0') charToAdd ='';
+      else if (charToAdd != '.') displayWindow.textContent = '';
 
     displayWindow.textContent += charToAdd;
   });
@@ -91,9 +96,11 @@ clearBtn.addEventListener('click', () => {
   y = '';
   answer = '';
   operator = '';
-  displayWindow.textContent = '';
+  displayWindow.textContent = '0';
 });
 
 deleteBtn.addEventListener('click', () => {
-  displayWindow.textContent = displayWindow.textContent.slice(0, -1);
+  if (displayWindow.textContent.length > 1) {
+    displayWindow.textContent = displayWindow.textContent.slice(0, -1);
+  }
 });
