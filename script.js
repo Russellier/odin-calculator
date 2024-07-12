@@ -8,9 +8,10 @@ const deleteBtn = document.querySelector('.delete');
 const negateBtn = document.querySelector('.negate');
 const squaredBtn = document.querySelector('.squared');
 const maxDisplayLength = 12;
+const charsInExp = 5; // number of constant characters in exp notation
 
-let x;
-let y;
+let num1;
+let num2;
 let answer;
 let operator = '';
 let isOperatorClicked = false;
@@ -48,8 +49,6 @@ function operate(a, b, operator) {
   }
 }
 
-//  fix: limit answer display length
-//    show as exponent or round of decimal numbers
 numberBtns.forEach((button) => {
   button.addEventListener('click', () => {
     isNumberClicked = true;
@@ -62,6 +61,7 @@ numberBtns.forEach((button) => {
     }
 
     // Prevent multiple decimal points
+    // After operator: displays '.1' should be '0.1'
     if (displayWindow.textContent.includes('.') && charToAdd === '.')
       charToAdd = '';
 
@@ -82,31 +82,43 @@ operatorBtns.forEach((button) => {
 
     // Prevent multiple operations without entering new number
     if (isNumberClicked) {
-      if (!x) x = Number(displayWindow.textContent);
-      else if (!y) y = Number(displayWindow.textContent);
+      if (!num1) num1 = Number(displayWindow.textContent);
+      else if (!num2) num2 = Number(displayWindow.textContent);
     }
 
-    if (x && y) answer = operate(x, y, operator);
+    if (num1 && num2) answer = operate(num1, num2, operator);
 
     operator = button.innerText;
 
-    console.log(`x: ${x} ${operator} y: ${y} answer: ${answer}`);
+    console.log(`num1: ${num1} ${operator} num2: ${num2} answer: ${answer}`);
 
+    // Create separate function
     if (answer) {
+      // Prevent overflow from answer
+      // Round off decimal numbers for answers less than a certain number
+      // Switch-case for answer
+      let answerLength = answer.toString().length;
+      if (answerLength > maxDisplayLength) {
+        console.log(typeof num1);
+        // console.log(typeof num2);
+        // console.log(answer);
+        answer = answer.toExponential(maxDisplayLength - charsInExp);
+      }
+
       displayWindow.textContent = answer;
-      x = answer;
-      y = '';
+      num1 = Number(answer);
+      num2 = '';
       answer = '';
     }
-    // if (operator === '=') x = '';
+    // if (operator === '=') num1 = '';
 
     isNumberClicked = false;
   });
 });
 
 clearBtn.addEventListener('click', () => {
-  x = '';
-  y = '';
+  num1 = '';
+  num2 = '';
   answer = '';
   operator = '';
   displayWindow.textContent = '0';
