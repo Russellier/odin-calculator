@@ -46,7 +46,6 @@ function operate(a, b, operator) {
   }
 }
 
-//  fix: multiple clicks of operator
 //  fix: limit answer display length
 //    show as exponent or round of decimal numbers
 numberBtns.forEach((button) => {
@@ -76,6 +75,7 @@ operatorBtns.forEach((button) => {
   button.addEventListener('click', () => {
     isOperatorClicked = true;
 
+    // Prevent multiple operations without entering new number
     if (isNumberClicked) {
       if (!x) x = Number(displayWindow.textContent);
       else if (!y) y = Number(displayWindow.textContent);
@@ -108,7 +108,7 @@ clearBtn.addEventListener('click', () => {
 });
 
 deleteBtn.addEventListener('click', () => {
-  if (displayWindow.textContent.length > 1) {
+  if (displayWindow.textContent.length > 1)
     displayWindow.textContent = displayWindow.textContent.slice(0, -1);
-  }
+  else displayWindow.textContent = '0';
 });
