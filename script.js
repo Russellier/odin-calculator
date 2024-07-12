@@ -5,6 +5,7 @@ const numberBtns = document.querySelectorAll('.number');
 const operatorBtns = document.querySelectorAll('.operator');
 const clearBtn = document.querySelector('.clear');
 const deleteBtn = document.querySelector('.delete');
+const negateBtn = document.querySelector('.negate');
 const maxDisplayLength = 12;
 
 let x;
@@ -108,9 +109,24 @@ clearBtn.addEventListener('click', () => {
 });
 
 deleteBtn.addEventListener('click', () => {
-  if (isNumberClicked) {
+  // Delete only if display is from user (i.e. not answer)
+  if (!isNumberClicked) return;
+
+  if (displayWindow.textContent.includes('-')) {
+    if (displayWindow.textContent.length > 2)
+      displayWindow.textContent = displayWindow.textContent.slice(0, -1);
+    else displayWindow.textContent = '0';
+  } else {
     if (displayWindow.textContent.length > 1)
       displayWindow.textContent = displayWindow.textContent.slice(0, -1);
     else displayWindow.textContent = '0';
   }
+});
+
+negateBtn.addEventListener('click', () => {
+  if (displayWindow.textContent === '0') return;
+
+  if (displayWindow.textContent.includes('-'))
+    displayWindow.textContent = displayWindow.textContent.slice(1);
+  else displayWindow.textContent = '-' + displayWindow.textContent;
 });
