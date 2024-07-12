@@ -112,15 +112,13 @@ deleteBtn.addEventListener('click', () => {
   // Delete only if display is from user (i.e. not answer)
   if (!isNumberClicked) return;
 
-  if (displayWindow.textContent.includes('-')) {
-    if (displayWindow.textContent.length > 2)
-      displayWindow.textContent = displayWindow.textContent.slice(0, -1);
-    else displayWindow.textContent = '0';
-  } else {
-    if (displayWindow.textContent.length > 1)
-      displayWindow.textContent = displayWindow.textContent.slice(0, -1);
-    else displayWindow.textContent = '0';
-  }
+  if (
+    (displayWindow.textContent.includes('-') &&
+      displayWindow.textContent.length === 2) ||
+    displayWindow.textContent.length === 1
+  )
+    displayWindow.textContent = '0';
+  else displayWindow.textContent = displayWindow.textContent.slice(0, -1);
 });
 
 negateBtn.addEventListener('click', () => {
