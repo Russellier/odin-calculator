@@ -6,6 +6,7 @@ const operatorBtns = document.querySelectorAll('.operator');
 const clearBtn = document.querySelector('.clear');
 const deleteBtn = document.querySelector('.delete');
 const negateBtn = document.querySelector('.negate');
+const squaredBtn = document.querySelector('.squared');
 const maxDisplayLength = 12;
 
 let x;
@@ -127,4 +128,10 @@ negateBtn.addEventListener('click', () => {
   if (displayWindow.textContent.includes('-'))
     displayWindow.textContent = displayWindow.textContent.slice(1);
   else displayWindow.textContent = '-' + displayWindow.textContent;
+});
+
+squaredBtn.addEventListener('click', () => {
+  isOperatorClicked = true;
+  answer = Number(displayWindow.textContent) ** 2;
+  displayWindow.textContent = answer;
 });
