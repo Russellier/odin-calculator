@@ -93,7 +93,7 @@ operatorBtns.forEach((button) => {
       y = '';
       answer = '';
     }
-    if (operator === '=') x = '';
+    // if (operator === '=') x = '';
 
     isNumberClicked = false;
   });
@@ -108,7 +108,9 @@ clearBtn.addEventListener('click', () => {
 });
 
 deleteBtn.addEventListener('click', () => {
-  if (displayWindow.textContent.length > 1)
-    displayWindow.textContent = displayWindow.textContent.slice(0, -1);
-  else displayWindow.textContent = '0';
+  if (isNumberClicked) {
+    if (displayWindow.textContent.length > 1)
+      displayWindow.textContent = displayWindow.textContent.slice(0, -1);
+    else displayWindow.textContent = '0';
+  }
 });
