@@ -53,21 +53,24 @@ function operate(a, b, operator) {
 numberBtns.forEach((button) => {
   button.addEventListener('click', () => {
     isNumberClicked = true;
+    let charToAdd = button.innerText;
 
+    // Clear display for next number input
     if (isOperatorClicked) {
       displayWindow.textContent = '';
       isOperatorClicked = false;
     }
 
-    let charToAdd = button.innerText;
-
+    // Prevent multiple decimal points
     if (displayWindow.textContent.includes('.') && charToAdd === '.')
       charToAdd = '';
 
+    // Prevent multiple zeroes
     if (displayWindow.textContent === '0')
       if (charToAdd === '0') charToAdd = '';
       else if (charToAdd != '.') displayWindow.textContent = '';
 
+    // Prevent overflow from input
     if (displayWindow.textContent.length <= maxDisplayLength)
       displayWindow.textContent += charToAdd;
   });
