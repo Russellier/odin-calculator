@@ -61,6 +61,7 @@ function operate(a, b, operator) {
 
 // Prevent display overflow from answer
 function fixAnswerLength(answer) {
+  answer = Number(answer);
   if (answer >= 1e100)
     return answer.toExponential(maxDisplayLength - charsInExp - 2);
   else if (answer >= 1e10)
