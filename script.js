@@ -49,6 +49,21 @@ function operate(a, b, operator) {
   }
 }
 
+// Prevent display overflow from answer
+function fixAnswerLength(answer) {
+  if (answer >= 1e100)
+    return answer.toExponential(maxDisplayLength - charsInExp - 2);
+  else if (answer >= 1e10)
+    return answer.toExponential(maxDisplayLength - charsInExp - 1);
+  else if (answer <= 1e-100)
+    return answer.toExponential(maxDisplayLength - charsInExp - 3);
+  else if (answer <= 1e-10)
+    return answer.toExponential(maxDisplayLength - charsInExp - 2);
+  else if (answer <= 1e-1)
+    return answer.toExponential(maxDisplayLength - charsInExp - 1);
+  else return answer.toFixed(maxDisplayLength - answer.toString().indexOf('.'));
+}
+
 numberBtns.forEach((button) => {
   button.addEventListener('click', () => {
     isNumberClicked = true;
@@ -92,26 +107,9 @@ operatorBtns.forEach((button) => {
 
     operator = button.innerText;
 
-    // Create separate function
     if (answer) {
-      if (answer.toString().length > maxDisplayLength) {
-        // Prevent display overflow from answer
-        // Round off decimal numbers for answers less than a certain number
-        if (answer >= 1e100)
-          answer = answer.toExponential(maxDisplayLength - charsInExp - 2);
-        else if (answer >= 1e10)
-          answer = answer.toExponential(maxDisplayLength - charsInExp - 1);
-        else if (answer <= 1e-100)
-          answer = answer.toExponential(maxDisplayLength - charsInExp - 3);
-        else if (answer <= 1e-10)
-          answer = answer.toExponential(maxDisplayLength - charsInExp - 2);
-        else if (answer <= 1e-1)
-          answer = answer.toExponential(maxDisplayLength - charsInExp - 1);
-        else
-          answer = answer.toFixed(
-            maxDisplayLength - answer.toString().indexOf('.')
-          );
-      }
+      if (answer.toString().length > maxDisplayLength)
+        answer = fixAnswerLength(answer);
 
       displayWindow.textContent = answer;
       num1 = Number(answer);
