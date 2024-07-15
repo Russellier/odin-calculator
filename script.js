@@ -153,5 +153,9 @@ negateBtn.addEventListener('click', () => {
 squaredBtn.addEventListener('click', () => {
   isOperatorClicked = true;
   answer = Number(displayWindow.textContent) ** 2;
+
+  if (answer.toString().length > maxDisplayLength)
+    answer = fixAnswerLength(answer);
+
   displayWindow.textContent = answer;
 });
