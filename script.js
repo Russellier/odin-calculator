@@ -10,9 +10,9 @@ const squaredBtn = document.querySelector('.squared');
 const maxDisplayLength = 11; // font-size dependent
 const charsInExp = 4; // number of constant characters in exp notation
 
-let num1;
-let num2;
-let answer;
+let num1 = '';
+let num2 = '';
+let answer = '';
 let operator = '';
 let isOperatorClicked = false;
 let isNumberClicked = false;
@@ -35,6 +35,16 @@ function divide(a, b) {
   if (b === 0) return 'Error';
   return a / b;
 }
+
+// function divide(a, b) {
+//   console.log(`a: ${a}`);
+//   console.log(`b: ${b}`);
+//   let ans = '';
+//   if (b == 0) ans = 'Error';
+//   else ans = a / b;
+//   console.log(`answer: ${ans}`);
+//   return ans;
+// }
 
 function operate(a, b, operator) {
   switch (operator) {
@@ -76,7 +86,7 @@ numberBtns.forEach((button) => {
     }
 
     // Prevent multiple decimal points
-    // After operator: displays '.1' should be '0.1'
+    // fix: after operator: displays '.1' should be '0.1'
     if (displayWindow.textContent.includes('.') && charToAdd === '.')
       charToAdd = '';
 
@@ -97,17 +107,17 @@ operatorBtns.forEach((button) => {
 
     // Prevent multiple operations without entering new number
     if (isNumberClicked) {
-      if (!num1) num1 = Number(displayWindow.textContent);
-      else if (!num2) num2 = Number(displayWindow.textContent);
+      if (num1 === '') num1 = Number(displayWindow.textContent);
+      else if (num2 === '') num2 = Number(displayWindow.textContent);
     }
 
-    if (num1 && num2) answer = operate(num1, num2, operator);
+    if (num1 !== '' && num2 !== '') answer = operate(num1, num2, operator);
 
-    // console.log(`num1: ${num1} ${operator} num2: ${num2} answer: ${answer}`);
+    console.log(`num1: ${num1} ${operator} num2: ${num2} answer: ${answer}`);
 
     operator = button.innerText;
 
-    if (answer) {
+    if (answer !== '') {
       if (answer.toString().length > maxDisplayLength)
         answer = fixAnswerLength(answer);
 
