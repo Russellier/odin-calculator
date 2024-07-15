@@ -79,6 +79,8 @@ numberBtns.forEach((button) => {
     isNumberClicked = true;
     let charToAdd = button.innerText;
 
+    if (operator === '=') num1 = '';
+
     // Clear display for next number input
     if (isOperatorClicked) {
       displayWindow.textContent = '';
