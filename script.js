@@ -88,8 +88,10 @@ numberBtns.forEach((button) => {
       isOperatorClicked = false;
     }
 
+    // Decimal after operator should display '0.' not '.'
+    if (displayWindow.textContent === '' && charToAdd === '.') charToAdd = '0.';
+
     // Prevent multiple decimal points
-    // fix: after operator: displays '.1' should be '0.1'
     if (displayWindow.textContent.includes('.') && charToAdd === '.')
       charToAdd = '';
 
