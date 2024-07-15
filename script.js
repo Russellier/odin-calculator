@@ -7,8 +7,8 @@ const clearBtn = document.querySelector('.clear');
 const deleteBtn = document.querySelector('.delete');
 const negateBtn = document.querySelector('.negate');
 const squaredBtn = document.querySelector('.squared');
-const maxDisplayLength = 12;
-const charsInExp = 5; // number of constant characters in exp notation
+const maxDisplayLength = 12; // font-size dependent
+const charsInExp = 4; // number of constant characters in exp notation
 
 let num1;
 let num2;
@@ -70,7 +70,7 @@ numberBtns.forEach((button) => {
       if (charToAdd === '0') charToAdd = '';
       else if (charToAdd != '.') displayWindow.textContent = '';
 
-    // Prevent overflow from input
+    // Prevent display overflow from input
     if (displayWindow.textContent.length <= maxDisplayLength)
       displayWindow.textContent += charToAdd;
   });
@@ -88,21 +88,29 @@ operatorBtns.forEach((button) => {
 
     if (num1 && num2) answer = operate(num1, num2, operator);
 
-    operator = button.innerText;
+    // console.log(`num1: ${num1} ${operator} num2: ${num2} answer: ${answer}`);
 
-    console.log(`num1: ${num1} ${operator} num2: ${num2} answer: ${answer}`);
+    operator = button.innerText;
 
     // Create separate function
     if (answer) {
-      // Prevent overflow from answer
-      // Round off decimal numbers for answers less than a certain number
-      // Switch-case for answer
-      let answerLength = answer.toString().length;
-      if (answerLength > maxDisplayLength) {
-        console.log(typeof num1);
-        // console.log(typeof num2);
-        // console.log(answer);
-        answer = answer.toExponential(maxDisplayLength - charsInExp);
+      if (answer.toString().length > maxDisplayLength) {
+        // Prevent display overflow from answer
+        // Round off decimal numbers for answers less than a certain number
+        if (answer >= 1e100)
+          answer = answer.toExponential(maxDisplayLength - charsInExp - 2);
+        else if (answer >= 1e10)
+          answer = answer.toExponential(maxDisplayLength - charsInExp - 1);
+        else if (answer <= 1e-100)
+          answer = answer.toExponential(maxDisplayLength - charsInExp - 3);
+        else if (answer <= 1e-10)
+          answer = answer.toExponential(maxDisplayLength - charsInExp - 2);
+        else if (answer <= 1e-1)
+          answer = answer.toExponential(maxDisplayLength - charsInExp - 1);
+        else
+          answer = answer.toFixed(
+            maxDisplayLength - answer.toString().indexOf('.')
+          );
       }
 
       displayWindow.textContent = answer;
@@ -110,7 +118,6 @@ operatorBtns.forEach((button) => {
       num2 = '';
       answer = '';
     }
-    // if (operator === '=') num1 = '';
 
     isNumberClicked = false;
   });
