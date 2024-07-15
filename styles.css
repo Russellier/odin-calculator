@@ -14,6 +14,9 @@
 }
 
 header {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: #1e2b1e;
+  border-bottom: 1px solid #9eb996;
   text-align: center;
   padding: 10px;
   margin: 0 0 20px;
@@ -45,11 +48,12 @@ div.display {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  font-size: 35px;
+  font-size: 43px;
   height: 70px;
 }
 
 p.display {
+  font-family: Calculator, sans-serif;
   margin: 3px;
 }
 

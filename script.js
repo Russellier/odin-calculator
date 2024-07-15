@@ -7,7 +7,7 @@ const clearBtn = document.querySelector('.clear');
 const deleteBtn = document.querySelector('.delete');
 const negateBtn = document.querySelector('.negate');
 const squaredBtn = document.querySelector('.squared');
-const maxDisplayLength = 12; // font-size dependent
+const maxDisplayLength = 11; // font-size dependent
 const charsInExp = 4; // number of constant characters in exp notation
 
 let num1;
