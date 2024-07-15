@@ -9,6 +9,10 @@
   padding: 0;
 }
 
+* {
+  background-color: #ebebeb;
+}
+
 header {
   text-align: center;
   padding: 10px;
@@ -24,18 +28,20 @@ header {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  height: 400px;
-  width: 250px;
+  height: 390px;
+  width: 260px;
+  background-color: #1e2b1e;
   border: 2px solid #9eb996;
   border-radius: 10px;
 }
 
-.calculator-body > div {
-  margin: 0 5px 0;
-  border: 1px solid #9eb996;
+.calculator-body > div,
+.row {
+  margin: 0 8px 0;
+  border-radius: 6px;
 }
 
-.display {
+div.display {
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -43,25 +49,49 @@ header {
   height: 70px;
 }
 
-.buttons {
+p.display {
+  margin: 3px;
+}
+
+.display,
+.buttons-container,
+.row {
+  background-color: #9eb996;
+}
+
+.buttons-container {
   display: flex;
   flex-direction: column;
 }
 
 .row {
   display: flex;
-  justify-content: space-around;
-  align-items: center;
+  justify-content: space-evenly;
+  align-items: stretch;
   height: 55px;
+  margin: 0;
 }
 
-.row button {
-  height: 48px;
-  width: 48px;
-  border-radius: 8px;
-}
-
-/* Temporary */
-* {
+button {
   background-color: #1e2b1e;
+  color: #9eb996;
+  font-weight: bolder;
+  font-size: 20px;
+  width: 80px;
+  border-radius: 4px;
+  margin: 2px;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+sup {
+  background-color: #1e2b1e;
+}
+
+button.number,
+button.negate,
+.negate > * {
+  background-color: #293a29;
 }
